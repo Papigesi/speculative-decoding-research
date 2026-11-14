@@ -1,0 +1,7 @@
+# Informational experiment configuration. CLI configuration loading comes later.
+model_id = "HuggingFaceTB/SmolLM-135M"
+max_new_tokens = 64
+mode = "greedy"
+temperature = 1.0
+top_p = 1.0
+use_cache = true
