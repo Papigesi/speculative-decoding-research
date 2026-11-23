@@ -1,10 +1,3 @@
-"""
-A single-sequence causal-LM generation loop without model.generate().
-
-Deliberately supports only a batch of one with no padding. This keeps the
-logits and KV-cache invariants explicit for now.
-"""
-
 from __future__ import annotations
 
 from dataclasses import dataclass, field

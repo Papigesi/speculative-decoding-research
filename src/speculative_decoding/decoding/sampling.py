@@ -1,10 +1,3 @@
-"""
-Sampling policies shared by autoregressive and speculative decoders.
-
-Speculative sampling must compare p and q after applying the same
-sampling-policy transformations to the target and draft logits.
-"""
-
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -37,12 +30,7 @@ class SamplingConfig:
 
 
 def logits_to_probs(logits: Tensor, config: SamplingConfig) -> Tensor:
-    """
-    Return normalized probabilities after temperature, top-k and top-p.
-
-    Accepts logits of shape [..., vocab]. Converts to float32 to reduce
-    numerical issues with half precision inference.
-    """
+    """Return normalized probabilities after temperature, top-k and top-p."""
     if logits.ndim < 1 or logits.shape[-1] < 1:
         raise ValueError("logits must end with a nonempty vocab dimension")
 
@@ -76,10 +64,7 @@ def select_next_token(
     *,
     generator: torch.Generator | None = None,
 ) -> Tensor:
-    """Sample one token per distribution, keeping a trailing size-1 dimension.
-
-    Expected common input: [batch, vocab], output: [batch, 1].
-    """
+    """Sample one token per distribution, keeping a trailing size-1 dimension."""
     if logits.ndim != 2:
         raise ValueError("select_next_token expects [batch, vocab] logits")
     if config.mode == "greedy":
